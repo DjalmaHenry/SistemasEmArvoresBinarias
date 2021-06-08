@@ -33,4 +33,22 @@ class ABBNode<T extends Comparable<T>> {
     ABBNode<T> getDir() {
         return dir;
     }
+
+    void insertNode(T valor) {
+        if (valor.compareTo(this.getInfo()) == 0) {
+            System.err.println("Valor repetido!");
+        } else if (valor.compareTo(this.getInfo()) < 0) {
+            if (this.esq == null) {
+                this.esq = new ABBNode(valor);
+            } else {
+                this.esq.insertNode(valor);
+            }
+        } else {
+            if (this.dir == null) {
+                this.dir = new ABBNode(valor);
+            } else {
+                this.dir.insertNode(valor);
+            }
+        }
+    }
 }
