@@ -67,4 +67,86 @@ public class ABB<T extends Comparable<T>> {
             System.out.println(r.getInfo());
         }
     }
+
+    public ABBNode<T> menorValor() {
+        ABBNode<T> r;
+        if (this.isEmpty()) {
+            System.err.println("Árvore vazia!");
+            return null;
+        } else {
+            r = buscaMenorValor(raiz);
+            System.out.println(r.getInfo());
+            return r;
+        }
+    }
+
+    private ABBNode<T> buscaMenorValor(ABBNode<T> r) {
+        if (r.getEsq() != null) {
+            r = buscaMenorValor(r.getEsq());
+        }
+        return r;
+    }
+
+    public ABBNode<T> maiorValor() {
+        ABBNode<T> r;
+        if (this.isEmpty()) {
+            System.err.println("Árvore vazia!");
+            return null;
+        } else {
+            r = buscaMaiorValor(raiz);
+            System.out.println(r.getInfo());
+            return r;
+        }
+    }
+
+    private ABBNode<T> buscaMaiorValor(ABBNode<T> r) {
+        if (r.getDir() != null) {
+            r = buscaMaiorValor(r.getDir());
+        }
+        return r;
+    }
+
+    public void insertSemRecursao(T valor) {
+        if (this.isEmpty()) {
+            raiz = new ABBNode(valor);
+        } else {
+            ABBNode<T> aux = raiz;
+            while (aux != null) {
+                if (valor.compareTo(aux.getInfo()) == 0) {
+                    System.err.println("Valor repetido!");
+                    return;
+                } else if (valor.compareTo(aux.getInfo()) < 0) {
+                    if (aux.getEsq() == null) {
+                        ABBNode<T> novo = new ABBNode(valor);
+                        aux.setEsq(novo);
+                        return;
+                    } else {
+                        aux = aux.getEsq();
+                    }
+                } else {
+                    if (aux.getDir() == null) {
+                        ABBNode<T> novo = new ABBNode(valor);
+                        aux.setDir(novo);
+                        return;
+                    } else {
+                        aux = aux.getDir();
+                    }
+                }
+            }
+        }
+    }
+    
+    public int contaNo() {
+        int cont;
+        ABBNode<T> r = raiz;
+        if (this.isEmpty()) {
+            return 0;
+        } else {
+            if (r != null) {
+            percorrerEmOrdem(r.getEsq());
+            System.out.println(r.getInfo());
+            percorrerEmOrdem(r.getDir());
+        }
+        }
+    }
 }

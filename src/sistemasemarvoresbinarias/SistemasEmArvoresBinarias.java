@@ -7,14 +7,13 @@ public class SistemasEmArvoresBinarias {
     public static void main(String[] args) {
         ABB arv = new ABB();
         
-        arv.insert(10);
-        arv.insert(100);
-        arv.insert(50);
-        arv.insert(20);
-        arv.insert(30);
+        arv.insertSemRecursao(10);
+        arv.insertSemRecursao(100);
+        arv.insertSemRecursao(50);
+        arv.insertSemRecursao(20);
+        arv.insertSemRecursao(30);
         
         arv.emOrdem();
-        
     }
     
 }
