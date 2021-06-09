@@ -135,18 +135,17 @@ public class ABB<T extends Comparable<T>> {
             }
         }
     }
-    
+
     public int contaNo() {
         int cont;
         ABBNode<T> r = raiz;
         if (this.isEmpty()) {
             return 0;
         } else {
-            if (r != null) {
-            percorrerEmOrdem(r.getEsq());
-            System.out.println(r.getInfo());
-            percorrerEmOrdem(r.getDir());
-        }
+            ABBNode<T> aux = raiz;
+            while (aux != null) {
+                
+            }
         }
     }
 }
