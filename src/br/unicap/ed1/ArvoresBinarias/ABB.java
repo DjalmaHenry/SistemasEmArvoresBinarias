@@ -68,15 +68,14 @@ public class ABB<T extends Comparable<T>> {
         }
     }
 
-    public ABBNode<T> menorValor() {
+    public T menorValor() {
         ABBNode<T> r;
         if (this.isEmpty()) {
             System.err.println("Árvore vazia!");
             return null;
         } else {
             r = buscaMenorValor(raiz);
-            System.out.println(r.getInfo());
-            return r;
+            return r.getInfo();
         }
     }
 
