@@ -136,16 +136,39 @@ public class ABB<T extends Comparable<T>> {
         }
     }
 
-    public int contaNo() {
-        int cont;
-        ABBNode<T> r = raiz;
-        if (this.isEmpty()) {
+    public int contaNo(ABBNode<T> r) {
+        if (r == null) {
             return 0;
         } else {
-            ABBNode<T> aux = raiz;
-            while (aux != null) {
-                
+            return 1 + contaNo(r.getDir()) + contaNo(r.getEsq());
+        }
+    }
+
+    public int contaFolha(ABBNode<T> r) {
+        if (r == null) {
+            return 0;
+        } else {
+            if (r.getDir() == null && r.getEsq() == null) {
+                return 1 + contaFolha(r.getDir()) + contaFolha(r.getEsq());
+            } else {
+                return contaFolha(r.getDir()) + contaFolha(r.getEsq());
             }
         }
+    }
+
+    public int contaNaoFinais(ABBNode<T> r) {
+        if (r == null) {
+            return 0;
+        } else {
+            if (r.getDir() != null || r.getEsq() != null) {
+                return 1 + contaNaoFinais(r.getDir()) + contaNaoFinais(r.getEsq());
+            } else {
+                return contaNaoFinais(r.getDir()) + contaNaoFinais(r.getEsq());
+            }
+        }
+    }
+
+    public ABBNode<T> getRaiz() {
+        return raiz;
     }
 }
