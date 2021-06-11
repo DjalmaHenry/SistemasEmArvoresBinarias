@@ -1,5 +1,7 @@
 package br.unicap.ed1.ArvoresBinarias;
 
+import br.unicap.c3.ed1.TAD.Queue;
+
 public class ABB<T extends Comparable<T>> {
 
     private ABBNode<T> raiz;
@@ -135,39 +137,100 @@ public class ABB<T extends Comparable<T>> {
         }
     }
 
-    public int contaNo(ABBNode<T> r) {
-        if (r == null) {
-            return 0;
-        } else {
-            return 1 + contaNo(r.getDir()) + contaNo(r.getEsq());
-        }
-    }
-
-    public int contaFolha(ABBNode<T> r) {
-        if (r == null) {
-            return 0;
-        } else {
-            if (r.getDir() == null && r.getEsq() == null) {
-                return 1 + contaFolha(r.getDir()) + contaFolha(r.getEsq());
-            } else {
-                return contaFolha(r.getDir()) + contaFolha(r.getEsq());
+    public void passeioPorNivel() {
+        Queue<ABBNode<T>> fila;
+        ABBNode<T> aux;
+        if (!this.isEmpty()) {
+            fila = new Queue(1000);
+            fila.enQueue(raiz);
+            while (!fila.isEmpty()) {
+                aux = fila.deQueue();
+                if (aux.getEsq() != null) {
+                    fila.enQueue(aux.getEsq());
+                }
+                if (aux.getDir() != null) {
+                    fila.enQueue(aux.getDir());
+                }
+                System.out.println(aux.getInfo());
             }
-        }
-    }
-
-    public int contaNaoFinais(ABBNode<T> r) {
-        if (r == null) {
-            return 0;
         } else {
-            if (r.getDir() != null || r.getEsq() != null) {
-                return 1 + contaNaoFinais(r.getDir()) + contaNaoFinais(r.getEsq());
-            } else {
-                return contaNaoFinais(r.getDir()) + contaNaoFinais(r.getEsq());
-            }
+            System.err.println("Árvore vazia!");
         }
     }
 
-    public ABBNode<T> getRaiz() {
-        return raiz;
+    public int passeioContaNo() {
+        Queue<ABBNode<T>> fila;
+        ABBNode<T> aux;
+        int cont = 0;
+        if (!this.isEmpty()) {
+            fila = new Queue(1000);
+            fila.enQueue(raiz);
+            while (!fila.isEmpty()) {
+                aux = fila.deQueue();
+                if (aux.getEsq() != null) {
+                    fila.enQueue(aux.getEsq());
+                }
+                if (aux.getDir() != null) {
+                    fila.enQueue(aux.getDir());
+                }
+                cont++;
+            }
+            return cont;
+        } else {
+            System.err.println("Árvore vazia!");
+            return 0;
+        }
+    }
+
+    public int passeioContaFolha() {
+        Queue<ABBNode<T>> fila;
+        ABBNode<T> aux;
+        int cont = 0;
+        if (!this.isEmpty()) {
+            fila = new Queue(1000);
+            fila.enQueue(raiz);
+            while (!fila.isEmpty()) {
+                aux = fila.deQueue();
+                if (aux.getEsq() != null) {
+                    fila.enQueue(aux.getEsq());
+                }
+                if (aux.getDir() != null) {
+                    fila.enQueue(aux.getDir());
+                }
+                if (aux.getDir() == null && aux.getEsq() == null) {
+                    cont++;
+                }
+            }
+            return cont;
+        } else {
+            System.err.println("Árvore vazia!");
+            return 0;
+        }
+    }
+
+    public int passeioContaNaoFinais() {
+        Queue<ABBNode<T>> fila;
+        ABBNode<T> aux;
+        int cont = 0;
+        if (!this.isEmpty()) {
+            fila = new Queue(1000);
+            fila.enQueue(raiz);
+            while (!fila.isEmpty()) {
+                aux = fila.deQueue();
+                if (aux.getEsq() != null) {
+                    fila.enQueue(aux.getEsq());
+                }
+                if (aux.getDir() != null) {
+                    fila.enQueue(aux.getDir());
+                }
+                if (aux.getDir() != null || aux.getEsq() != null) {
+                    cont++;
+                }
+            }
+            return cont;
+        } else {
+            System.err.println("Árvore vazia!");
+            return 0;
+        }
     }
 }

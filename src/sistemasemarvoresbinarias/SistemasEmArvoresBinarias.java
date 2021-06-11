@@ -13,13 +13,13 @@ public class SistemasEmArvoresBinarias {
         arv.insert(20);
         arv.insert(30);
 
-        int cont = arv.contaNo(arv.getRaiz());
+        int cont = arv.passeioContaNo();
         System.out.println("Nós: " + cont);
         
-        cont = arv.contaFolha(arv.getRaiz());
+        cont = arv.passeioContaFolha();
         System.out.println("Folhas: " + cont);
         
-        cont = arv.contaNaoFinais(arv.getRaiz());
+        cont = arv.passeioContaNaoFinais();
         System.out.println("Não Finais: " + cont);
     }
 
