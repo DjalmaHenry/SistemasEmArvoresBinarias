@@ -1,6 +1,7 @@
 package br.unicap.ed1.ArvoresBinarias;
 
 import br.unicap.c3.ed1.TAD.Queue;
+import br.unicap.c3.ed1.TAD.Stack;
 
 public class ABB<T extends Comparable<T>> {
 
@@ -224,6 +225,50 @@ public class ABB<T extends Comparable<T>> {
                     fila.enQueue(aux.getDir());
                 }
                 if (aux.getDir() != null || aux.getEsq() != null) {
+                    cont++;
+                }
+            }
+            return cont;
+        } else {
+            System.err.println("Árvore vazia!");
+            return 0;
+        }
+    }
+
+    public T buscaBinaria(T valor) {
+        if (this.isEmpty()) {
+            return null;
+        } else {
+            ABBNode<T> aux = raiz;
+            while (aux != null) {
+                if (valor.compareTo(aux.getInfo()) == 0) {
+                    return aux.getInfo();
+                } else if (valor.compareTo(aux.getInfo()) < 0) {
+                    aux = aux.getEsq();
+                } else {
+                    aux = aux.getDir();
+                }
+            }
+            return null;
+        }
+    }
+
+    public int passeioContaRepetidos(T valor) {
+        Queue<ABBNode<T>> fila;
+        ABBNode<T> aux;
+        int cont = 0;
+        if (!this.isEmpty()) {
+            fila = new Queue(1000);
+            fila.enQueue(raiz);
+            while (!fila.isEmpty()) {
+                aux = fila.deQueue();
+                if (aux.getEsq() != null) {
+                    fila.enQueue(aux.getEsq());
+                }
+                if (aux.getDir() != null) {
+                    fila.enQueue(aux.getDir());
+                }
+                if (valor.compareTo(aux.getInfo()) == 0) {
                     cont++;
                 }
             }
