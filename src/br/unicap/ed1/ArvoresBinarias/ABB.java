@@ -4,9 +4,9 @@ import br.unicap.c3.ed1.TAD.Queue;
 import br.unicap.c3.ed1.TAD.Stack;
 
 public class ABB<T extends Comparable<T>> {
-
+    
     private ABBNode<T> raiz;
-
+    
     public boolean isEmpty() {
         if (raiz == null) {
             return true;
@@ -14,7 +14,7 @@ public class ABB<T extends Comparable<T>> {
             return false;
         }
     }
-
+    
     public void insert(T valor) {
         if (this.isEmpty()) {
             raiz = new ABBNode(valor);
@@ -22,7 +22,7 @@ public class ABB<T extends Comparable<T>> {
             raiz.insertNode(valor);
         }
     }
-
+    
     public void emOrdem() {
         if (this.isEmpty()) {
             System.err.println("Árvore vazia!");
@@ -30,7 +30,7 @@ public class ABB<T extends Comparable<T>> {
             percorrerEmOrdem(raiz);
         }
     }
-
+    
     private void percorrerEmOrdem(ABBNode<T> r) {
         if (r != null) {
             percorrerEmOrdem(r.getEsq());
@@ -38,7 +38,7 @@ public class ABB<T extends Comparable<T>> {
             percorrerEmOrdem(r.getDir());
         }
     }
-
+    
     public void preOrdem() {
         if (this.isEmpty()) {
             System.err.println("Árvore vazia!");
@@ -46,7 +46,7 @@ public class ABB<T extends Comparable<T>> {
             percorrerPreOrdem(raiz);
         }
     }
-
+    
     private void percorrerPreOrdem(ABBNode<T> r) {
         if (r != null) {
             System.out.println(r.getInfo());
@@ -54,7 +54,7 @@ public class ABB<T extends Comparable<T>> {
             percorrerPreOrdem(r.getDir());
         }
     }
-
+    
     public void posOrdem() {
         if (this.isEmpty()) {
             System.err.println("Árvore vazia!");
@@ -62,7 +62,7 @@ public class ABB<T extends Comparable<T>> {
             percorrerPosOrdem(raiz);
         }
     }
-
+    
     private void percorrerPosOrdem(ABBNode<T> r) {
         if (r != null) {
             percorrerPosOrdem(r.getEsq());
@@ -70,7 +70,7 @@ public class ABB<T extends Comparable<T>> {
             System.out.println(r.getInfo());
         }
     }
-
+    
     public T menorValor() {
         ABBNode<T> r;
         if (this.isEmpty()) {
@@ -81,14 +81,14 @@ public class ABB<T extends Comparable<T>> {
             return r.getInfo();
         }
     }
-
+    
     private ABBNode<T> buscaMenorValor(ABBNode<T> r) {
         if (r.getEsq() != null) {
             r = buscaMenorValor(r.getEsq());
         }
         return r;
     }
-
+    
     public ABBNode<T> maiorValor() {
         ABBNode<T> r;
         if (this.isEmpty()) {
@@ -100,14 +100,14 @@ public class ABB<T extends Comparable<T>> {
             return r;
         }
     }
-
+    
     private ABBNode<T> buscaMaiorValor(ABBNode<T> r) {
         if (r.getDir() != null) {
             r = buscaMaiorValor(r.getDir());
         }
         return r;
     }
-
+    
     public void insertSemRecursao(T valor) {
         if (this.isEmpty()) {
             raiz = new ABBNode(valor);
@@ -137,7 +137,7 @@ public class ABB<T extends Comparable<T>> {
             }
         }
     }
-
+    
     public void passeioPorNivel() {
         Queue<ABBNode<T>> fila;
         ABBNode<T> aux;
@@ -158,7 +158,7 @@ public class ABB<T extends Comparable<T>> {
             System.err.println("Árvore vazia!");
         }
     }
-
+    
     public int passeioContaNo() {
         Queue<ABBNode<T>> fila;
         ABBNode<T> aux;
@@ -182,7 +182,7 @@ public class ABB<T extends Comparable<T>> {
             return 0;
         }
     }
-
+    
     public int passeioContaFolha() {
         Queue<ABBNode<T>> fila;
         ABBNode<T> aux;
@@ -208,7 +208,7 @@ public class ABB<T extends Comparable<T>> {
             return 0;
         }
     }
-
+    
     public int passeioContaNaoFinais() {
         Queue<ABBNode<T>> fila;
         ABBNode<T> aux;
@@ -234,7 +234,7 @@ public class ABB<T extends Comparable<T>> {
             return 0;
         }
     }
-
+    
     public T buscaBinaria(T valor) {
         if (this.isEmpty()) {
             return null;
@@ -252,7 +252,7 @@ public class ABB<T extends Comparable<T>> {
             return null;
         }
     }
-
+    
     public int passeioContaRepetidos(T valor) {
         Queue<ABBNode<T>> fila;
         ABBNode<T> aux;
@@ -277,5 +277,82 @@ public class ABB<T extends Comparable<T>> {
             System.err.println("Árvore vazia!");
             return 0;
         }
+    }
+    
+    public void passeioEmOrdem() {
+        Stack<ABBNode> pilha = new Stack();
+        ABBNode<T> aux;
+        if (isEmpty()) {
+            System.err.println("Árvore vazia!");
+        } else {
+            aux = raiz;
+            while (!pilha.isEmpty() || aux != null) {
+                if (aux != null) {
+                    pilha.push(aux);
+                    aux = aux.getEsq();
+                } else {
+                    aux = pilha.pop();
+                    System.out.println(aux.getInfo());
+                    aux = aux.getDir();
+                }
+            }
+        }
+    }
+    
+    public void passeioPreOrdem() {
+        Stack<ABBNode> pilha = new Stack();
+        ABBNode<T> aux;
+        if (isEmpty()) {
+            System.err.println("Árvore vazia!");
+        } else {
+            aux = raiz;
+            while (!pilha.isEmpty() || aux != null) {
+                if (aux != null) {
+                    System.out.println(aux.getInfo());
+                    pilha.push(aux);
+                    aux = aux.getEsq();
+                } else {
+                    aux = pilha.pop();
+                    aux = aux.getDir();
+                }
+            }
+        }
+    }
+    
+    public void remove(T valor) {
+        if (isEmpty()) {
+            System.err.println("Árvore Vazia!");
+        } else {
+            raiz = removeNode(raiz, valor);
+        }
+    }
+    
+    private ABBNode<T> removeNode(ABBNode<T> r, T valor) {
+        if (r != null) {
+            if (valor.compareTo(r.getInfo()) == 0) {
+                ABBNode<T> pai, filho;
+                if (r.getEsq() == null && r.getDir() == null) {
+                    r = null;
+                } else if (r.getEsq() == null) {
+                    r = r.getDir();
+                } else if (r.getDir() == null) {
+                    r = r.getEsq();
+                } else {
+                    pai = r;
+                    filho = pai.getEsq();
+                    while (filho.getEsq() != null) {
+                        pai = filho;
+                        filho = filho.getDir();
+                    }
+                    pai.setDir(filho.getEsq());
+                    r.setInfo(filho.getInfo());
+                }
+            } else if (valor.compareTo(r.getInfo()) < 0) {
+                r.setEsq(removeNode(r.getEsq(), valor));
+            } else {
+                r.setDir(removeNode(r.getDir(), valor));
+            }
+        }
+        return r;
     }
 }
