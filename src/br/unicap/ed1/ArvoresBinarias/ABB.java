@@ -235,7 +235,7 @@ public class ABB<T extends Comparable<T>> {
         }
     }
     
-    public T buscaBinaria(T valor) {
+    public T buscaNo(T valor) {
         if (this.isEmpty()) {
             return null;
         } else {

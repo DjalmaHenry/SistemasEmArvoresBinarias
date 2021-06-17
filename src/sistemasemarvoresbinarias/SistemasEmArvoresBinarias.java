@@ -13,9 +13,9 @@ public class SistemasEmArvoresBinarias {
         arv.insert(20);
         arv.insert(30);
 
-        arv.passeioPreOrdem();
+        arv.remove(20);
         System.out.println("--------------------");
-        arv.preOrdem();
+        arv.emOrdem();
 //        System.out.println("--------------------");
 //        arv.emOrdem();
     }
