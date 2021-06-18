@@ -4,9 +4,9 @@ import br.unicap.c3.ed1.TAD.Queue;
 import br.unicap.c3.ed1.TAD.Stack;
 
 public class ABB<T extends Comparable<T>> {
-    
+
     private ABBNode<T> raiz;
-    
+
     public boolean isEmpty() {
         if (raiz == null) {
             return true;
@@ -14,7 +14,7 @@ public class ABB<T extends Comparable<T>> {
             return false;
         }
     }
-    
+
     public void insert(T valor) {
         if (this.isEmpty()) {
             raiz = new ABBNode(valor);
@@ -22,7 +22,7 @@ public class ABB<T extends Comparable<T>> {
             raiz.insertNode(valor);
         }
     }
-    
+
     public void emOrdem() {
         if (this.isEmpty()) {
             System.err.println("Árvore vazia!");
@@ -30,7 +30,7 @@ public class ABB<T extends Comparable<T>> {
             percorrerEmOrdem(raiz);
         }
     }
-    
+
     private void percorrerEmOrdem(ABBNode<T> r) {
         if (r != null) {
             percorrerEmOrdem(r.getEsq());
@@ -38,7 +38,7 @@ public class ABB<T extends Comparable<T>> {
             percorrerEmOrdem(r.getDir());
         }
     }
-    
+
     public void preOrdem() {
         if (this.isEmpty()) {
             System.err.println("Árvore vazia!");
@@ -46,7 +46,7 @@ public class ABB<T extends Comparable<T>> {
             percorrerPreOrdem(raiz);
         }
     }
-    
+
     private void percorrerPreOrdem(ABBNode<T> r) {
         if (r != null) {
             System.out.println(r.getInfo());
@@ -54,7 +54,7 @@ public class ABB<T extends Comparable<T>> {
             percorrerPreOrdem(r.getDir());
         }
     }
-    
+
     public void posOrdem() {
         if (this.isEmpty()) {
             System.err.println("Árvore vazia!");
@@ -62,7 +62,7 @@ public class ABB<T extends Comparable<T>> {
             percorrerPosOrdem(raiz);
         }
     }
-    
+
     private void percorrerPosOrdem(ABBNode<T> r) {
         if (r != null) {
             percorrerPosOrdem(r.getEsq());
@@ -70,7 +70,7 @@ public class ABB<T extends Comparable<T>> {
             System.out.println(r.getInfo());
         }
     }
-    
+
     public T menorValor() {
         ABBNode<T> r;
         if (this.isEmpty()) {
@@ -81,14 +81,14 @@ public class ABB<T extends Comparable<T>> {
             return r.getInfo();
         }
     }
-    
+
     private ABBNode<T> buscaMenorValor(ABBNode<T> r) {
         if (r.getEsq() != null) {
             r = buscaMenorValor(r.getEsq());
         }
         return r;
     }
-    
+
     public ABBNode<T> maiorValor() {
         ABBNode<T> r;
         if (this.isEmpty()) {
@@ -100,14 +100,14 @@ public class ABB<T extends Comparable<T>> {
             return r;
         }
     }
-    
+
     private ABBNode<T> buscaMaiorValor(ABBNode<T> r) {
         if (r.getDir() != null) {
             r = buscaMaiorValor(r.getDir());
         }
         return r;
     }
-    
+
     public void insertSemRecursao(T valor) {
         if (this.isEmpty()) {
             raiz = new ABBNode(valor);
@@ -137,7 +137,7 @@ public class ABB<T extends Comparable<T>> {
             }
         }
     }
-    
+
     public void passeioPorNivel() {
         Queue<ABBNode<T>> fila;
         ABBNode<T> aux;
@@ -158,7 +158,7 @@ public class ABB<T extends Comparable<T>> {
             System.err.println("Árvore vazia!");
         }
     }
-    
+
     public int passeioContaNo() {
         Queue<ABBNode<T>> fila;
         ABBNode<T> aux;
@@ -182,7 +182,7 @@ public class ABB<T extends Comparable<T>> {
             return 0;
         }
     }
-    
+
     public int passeioContaFolha() {
         Queue<ABBNode<T>> fila;
         ABBNode<T> aux;
@@ -208,7 +208,7 @@ public class ABB<T extends Comparable<T>> {
             return 0;
         }
     }
-    
+
     public int passeioContaNaoFinais() {
         Queue<ABBNode<T>> fila;
         ABBNode<T> aux;
@@ -234,7 +234,7 @@ public class ABB<T extends Comparable<T>> {
             return 0;
         }
     }
-    
+
     public T buscaNo(T valor) {
         if (this.isEmpty()) {
             return null;
@@ -252,33 +252,27 @@ public class ABB<T extends Comparable<T>> {
             return null;
         }
     }
-    
+
     public int passeioContaRepetidos(T valor) {
-        Queue<ABBNode<T>> fila;
-        ABBNode<T> aux;
+        ABBNode<T> aux = raiz;
         int cont = 0;
         if (!this.isEmpty()) {
-            fila = new Queue(1000);
-            fila.enQueue(raiz);
-            while (!fila.isEmpty()) {
-                aux = fila.deQueue();
-                if (aux.getEsq() != null) {
-                    fila.enQueue(aux.getEsq());
-                }
-                if (aux.getDir() != null) {
-                    fila.enQueue(aux.getDir());
-                }
+            while (aux != null) {
                 if (valor.compareTo(aux.getInfo()) == 0) {
                     cont++;
+                }
+                if (valor.compareTo(aux.getInfo()) < 0) {
+                    aux = aux.getEsq();
+                } else {
+                    aux = aux.getDir();
                 }
             }
             return cont;
         } else {
-            System.err.println("Árvore vazia!");
             return 0;
         }
     }
-    
+
     public void passeioEmOrdem() {
         Stack<ABBNode> pilha = new Stack();
         ABBNode<T> aux;
@@ -298,7 +292,7 @@ public class ABB<T extends Comparable<T>> {
             }
         }
     }
-    
+
     public void passeioPreOrdem() {
         Stack<ABBNode> pilha = new Stack();
         ABBNode<T> aux;
@@ -318,7 +312,7 @@ public class ABB<T extends Comparable<T>> {
             }
         }
     }
-    
+
     public void remove(T valor) {
         if (isEmpty()) {
             System.err.println("Árvore Vazia!");
@@ -326,7 +320,7 @@ public class ABB<T extends Comparable<T>> {
             raiz = removeNode(raiz, valor);
         }
     }
-    
+
     private ABBNode<T> removeNode(ABBNode<T> r, T valor) {
         if (r != null) {
             if (valor.compareTo(r.getInfo()) == 0) {
